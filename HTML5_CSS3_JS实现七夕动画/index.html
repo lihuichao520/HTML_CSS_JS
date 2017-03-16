@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>七夕主题</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="firstPage.css">
+	<link rel="stylesheet" type="text/css" href="secondPage.css">
+	<link rel="stylesheet" type="text/css" href="thirdPage.css">
+	<script src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="Swipe.js"></script>
+	<!--使用一个插件Jquery.transit.这个插件就是具体封装了transition的CSS3过渡动画的实现-->
+	<script type="text/javascript" src="55ac9ea30001ace700000000.js"></script>
+	<script type="text/javascript" src="BoyWalkAndDoor.js"></script>
+    <script type="text/javascript" src="startAnima.js"></script>
+
+    <style type="text/css">
+    	@-webkit-keyframes person-slow{
+    		0%{
+    			background-position: -0px -291px;
+    		}
+    		25%{
+    			background-position: -602px -0px;
+    		}
+    		50%{
+    			background-position: -302px -291px;
+    		}
+    		75%{
+    			background-position: -151px -291px;
+    		}
+    		100%{
+    			background-position: -0px -291px;
+    		}
+    	}
+    	@-moz-keyframes person-slow{
+    		0%{
+    			background-position: -0px -291px;
+    		}
+    		25%{
+    			background-position: -602px -0px;
+    		}
+    		50%{
+    			background-position: -302px -291px;
+    		}
+    		75%{
+    			background-position: -151px -291px;
+    		}
+    		100%{
+    			background-position: -0px -291px;
+    		}
+    	}
+    </style>
+</head>
+<body>
+	 <div id="content">
+	 	
+	 	<ul class="content-wrap">
+	 		
+	 		<li>
+	 			<div class="a_background">
+	 				<div class="a_background_top"></div>
+                    <div class="a_background_middle"></div>
+                    <div class="a_background_bottom"></div>
+	 			</div>
+
+	 			<!--太阳-->
+	 			<div id="sun"></div>
+	 			<!--云-->
+	 			<div class="cloudArea">
+	 				<div class="cloud cloud1"></div>
+	 				<div class="cloud cloud2"></div>
+	 			</div>
+	 		</li>
+	 		<li>
+	 			<!--背景图-->
+	 			<div class="b_background"></div>
+	 			<!-- 商店的灯的亮度变化是由切换背景图片实现的，所以特意做个预加载，防止闪屏问题 -->
+	 			<div class="b_background_preload"></div>
+	 			<!-- 商店 -->
+	 			<div class="shop">
+	 				<div class="door">
+	 					<div class="doorLeft"></div>
+	 					<div class="doorRight"></div>
+	 				</div>
+	 				<!-- 灯 -->
+	 				<div class="lamp"></div>
+	 			</div>
+
+	 			<!-- 鸟 -->
+	 			<div class="bird"></div>
+	 		</li>
+	 		<li>
+	 			<!-- 背景图 -->
+	 			<div class="c_background">
+
+	 				  <div class="c_background_top"></div>
+	 				  <div class="c_background_middle"></div>
+	 				  <div class="c_background_bottom"></div>
+	 			</div>
+
+	 			<!-- 小女孩 -->
+	 			<div class="girl"></div>
+
+	 			<!-- 水波 -->
+                <div class="bridge-bottom">
+                    <div class="water">
+                        <div id="water1" class="water_1"></div>
+                        <div id="water2" class="water_2"></div>
+                        <div id="water3" class="water_3"></div>
+                        <div id="water4" class="water_4"></div>
+                    </div>
+                </div>
+                <!-- 星星 -->
+                <ul class="stars">
+                    <li class="stars1"></li>
+                    <li class="stars2"></li>
+                    <li class="stars3"></li>
+                    <li class="stars4"></li>
+                    <li class="stars5"></li>
+                    <li class="stars6"></li>
+                </ul>
+
+	 		</li>
+	 	</ul>
+	 	
+        <!-- 小男孩不能嵌入任何一个页面，否则无法切换到下一个页面中。因此小男孩的布局与页面根节点属于并列结构-->
+        <!-- 通过CSS3的animation和transition来实现了人物走路的效果-->
+        <div id="boy" class="behavior"></div>
+        
+        <!-- 飘落的花瓣要比所有元素的层级都要高 -->
+        <div id="flowerSlide"></div>
+       
+
+	 </div>
+	 <script type="text/javascript">
+
+ //        var visualWidth = $('#content').width();
+ //    var visualHeight = $('#content').height();
+ //    var swipe = Swipe($("#content"));
+
+ //    //小男孩动画处理
+ //    var boy = BoyWalk();
+
+ //    // 实现鸟飞
+ //    var bird = {
+ //        elem:$(".bird"),
+ //        fly:function(){
+ //        	this.elem.addClass("flying");
+ //        	this.elem.transition({
+ //        	 	right:visualWidth
+ //        	}, 15000, 'linear');
+ //        }
+ //    };
+
+ //    // 获取数据的函数
+ //    var getValue = function(className){
+ //        var $elem = $(''+className +'');
+ //        return{
+ //            height:$elem.height(),
+ //            top:$elem.position().top
+ //        };
+ //    };
+
+ //    // 获取桥的顶部值
+ //    var bridgeY = function(){
+ //        var data = getValue('.c_background_middle');
+ //        return data.top;
+ //    }();
+
+ //    // 小女孩的位置修正
+ //    var girl = {
+ //            elem:$('.girl'),
+ //            getHeight:function(){
+ //            	return this.elem.height();
+ //            },
+ //             getWidth:function(){
+ //             	return this.elem.width();
+ //             },
+ //            setOffset:function(){
+ //            	this.elem.css({
+ //            		left:visualWidth/2,
+ //            		top: bridgeY - this.getHeight()
+ //            	});
+ //            },
+ //             getOffset:function(){
+ //             	return this.elem.offset();
+ //             },
+ //             // 小女孩转身动作
+ //             turnBack:function(){
+ //             	this.elem.addClass('girlTurnBack');
+ //             }
+ //    };
+
+                       		
+ //    // 修正小女孩的位置
+ //    girl.setOffset();
+
+ //    //页面滚动到指定位置
+	// function scrollTo(time, proportionX){
+               
+ //        var distX = $("#content").width() * proportionX;
+ //        swipe.scrollTo(distX, time);
+	// }
+        
+	 	
+
+        //用来实现临时调整页面，为了好对第二个页面进行静态布局
+        // swipe.scrollTo (visualWidth*2, 0);
+
+         
+        
+       // boy.takeFlowers();
+
+
+
+
+
+
+
+       
+        // function startWalk(){
+        // 	boy.walkTo(2000, 0.5).then(
+        //           function(){
+        //              // 暂停走路
+        //              boy.stopWalk();
+        //           }).then(function(){
+        //           	// 开门
+        //           	return openDoor();
+        //           }).then(function(){
+        //           	// 开灯
+        //           	lamp.bright();
+                  	
+        //           }).then(function(){
+        //           	// 走进商店
+        //           	return boy.comInShop(2000);
+        //           }).then(function(){
+        //           	// 取花
+        //           	return boy.takeFlowers();
+        //           }).then(function(){
+        //           	// 鸟飞
+        //           	 bird.fly();
+        //           }).then(function(){
+        //           	// 出商店
+        //           	return boy.outOfShop(2000);
+        //           }).then(function(){
+        //           	// 关灯
+        //           	lamp.dark();
+        //           });
+        // }
+
+                 // $('button:first').click(function(){
+                 // 	boy.walkTo(2000, 0.15)
+                	// .then(function(){
+                 // 		// 第二次走路到桥上，此时最终的top和女孩的top一样,但是要换算成比例
+                 // 		return boy.walkTo(1500, 0.25, (bridgeY - girl.getHeight())/visualHeight); 
+                 // 	}).then(function(){
+                 // 		// 第三次在桥上直行靠近女孩
+                 // 		var proportionX = (girl.getOffset().left - boy.getWidth() + girl.getWidth()/5)/visualWidth;
+                 // 		return boy.walkTo(1500, proportionX);
+                 // 	}).then(function(){
+                 // 		// 停止男孩的步伐并且恢复男孩的原始状态
+                 // 		boy.backToOriginal();
+                 // 	}).then(function(){
+                 // 		// 给男孩女孩添加转身动作,并通过定时器模拟一个暂停的时间，让人感觉有一个等待转身的效果
+                 // 		setTimeout(function(){
+                 // 			girl.turnBack();
+                 // 		    boy.turnBack();
+                 // 		}, 1000);
+                 		
+                 // 	}).then(function(){
+                 // 		// 落花
+                 // 		flowersSlide();
+                 // 	})
+        //          // });
+         //   $('button:first').click(function(){
+         //   	       //实现太阳公转
+         //            $("#sun").addClass('rotation');
+         //            //实现天空的浮云飘动
+         //            $(".cloud:first").addClass('cloud1Anim');
+         //            $(".cloud:last").addClass('cloud2Anim');
+         //            // 男孩第一次开始走动
+         //            boy.walkTo(2000, 0.5)
+         //         	.then(function(){
+         //          		// 男孩走到可视区域的20%时页面滚动
+         //         		scrollTo(4000, 1);
+         //          		// 鸟飞
+         //             	bird.fly();
+         //          	}).then(function(){
+         //                 // 男孩第二次走动
+         //          		return boy.walkTo(4000, 0.5);
+         //          	}).then(function(){
+
+         //                 // 暂停走路
+         //                 boy.stopWalk();
+         //             }).then(function(){
+         //              	// 开门
+         //              	return openDoor();
+         //             }).then(function(){
+         //              	// 开灯
+         //              	lamp.bright();
+                  	
+         //             }).then(function(){
+         //             	// 走进商店
+         //             	return boy.comInShop(2000);
+         //             }).then(function(){
+         //              	// 取花
+         //             	return boy.takeFlowers();
+         //            }).then(function(){
+         //             	// 出商店
+         //             	return boy.outOfShop(2000);
+         //             }).then(function(){
+         //             	// 关门
+         //             	return closeDoor();
+         //             }).then(function(){
+         //             	// 关灯
+         //             	lamp.dark();
+         //            }).then(function(){
+         //            	   // 页面滚动到第三个页面
+         //            	   scrollTo(4000, 2);
+         //            }).then(function(){
+         //            	   // 男孩走到第三个页面的时候的处理
+         //                return boy.walkTo(4000, 0.15);
+         //            }).then(function(){ 
+         //                 // 第二次走路到桥上，此时最终的top和女孩的top一样,但是要换算成比例
+         //          		return boy.walkTo(4000, 0.25, (bridgeY - girl.getHeight())/visualHeight); 
+         //          	}).then(function(){
+         //          		// 第三次在桥上直行靠近女孩
+         //          		var proportionX = (girl.getOffset().left - boy.getWidth() - girl.getWidth()/5 )/visualWidth;
+         //          		return boy.walkTo(4000, proportionX);
+         //          	}).then(function(){
+         //          		// 停止男孩的步伐并且恢复男孩的原始状态
+         //          		boy.backToOriginal();
+         //          	}).then(function(){
+         //          		// 给男孩女孩添加转身动作,并通过定时器模拟一个暂停的时间，让人感觉有一个等待转身的效果
+         //          		setTimeout(function(){
+         //          			girl.turnBack();
+         //          		    boy.turnBack(
+         //                         // 落花
+         //          		        flowersSlide()
+         //          		    	);
+         //          		}, 1000);
+                 		
+         //          	});
+         // });
+
+        // // function doorAction(leftDoor, rightDoor, time){
+        //     var count = 2;          // 利用count技术监听动画完成
+        //     var $door = $('.door');
+        //     var doorLeft = $('.doorLeft');
+        //     var doorRight = $('.doorRight');
+
+        //     var defer = $.Deferred();
+
+        //      // 等待开门完成
+        //      var complete = function(){
+        //      	console.log(count);
+                 
+        //          if(count === 1){
+        //               defer.resolve();
+        //               return ;
+        //          }
+
+        //          count--;
+
+        //      };
+
+             
+        //      doorLeft.transition({
+        //      	'left':leftDoor
+        //      }, time,complete);
+
+           
+        //      doorRight.transition({
+        //      	'left':rightDoor
+        //      }, time, complete);
+
+        //      return defer;
+        // }
+
+        // // 开门
+        // function openDoor(){
+        // 	return doorAction('-50%', '100%', 2000);
+        // }
+        // // 关门
+        // function closeDoor(){
+        // 	return doorAction('0%','50%',2000);
+        // }
+
+        // // 亮灯关灯的操作动画
+        // var lamp = {
+        //         elem:$('.b_background'),
+        //         bright:function(){
+        //         	this.elem.addClass('lampBright');
+        //         },
+        //         dark:function(){
+        //         	this.elem.removeClass('lampBright');
+        //         }
+        // };
+
+
+        // $('button:last').click(function(){
+        // 	closeDoor().then(function(){
+        // 		lamp.dark();
+        // 	});
+        // });
+
+        // //点击按钮开始走路
+        // $('button:first').click(function(){
+               
+        //        //实现太阳公转
+        //        $("#sun").addClass('rotation');
+        //        //实现天空的浮云飘动
+        //        $(".cloud:first").addClass('cloud1Anim');
+        //        $(".cloud:last").addClass('cloud2Anim');
+
+        // 	   boy.walkTo(6000,0.2)
+        // 	   .then(function(){
+        // 	   	   scrollTo(8000, 1);
+        // 	   	   //return boy.walkTo(2000, 0.4);
+        // 	   }).then(function(){
+        //              //boy.setColor('green');
+        //              return boy.walkTo(2000, 0.5);
+        // 	   }).then(function(){
+        // 	   	    boy.setColor('blue');
+
+        // 	   })
+        // });
+
+	 </script>
+     
+</body>
+</html>

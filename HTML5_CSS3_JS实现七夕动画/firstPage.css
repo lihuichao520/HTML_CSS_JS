@@ -1,0 +1,137 @@
+/*第一张背景图片设置*/
+
+.a_background{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+.a_background_top{
+
+	width: 100%;
+	height: 71.6%;
+	background-image: url("Images/ATop.png");
+	background-size: 100% 100%;
+}
+
+.a_background_middle{
+
+	width: 100%;
+	height: 13.1%;
+	background-image: url("http://img.mukewang.com/55addf800001ff2e14410118.png");
+	background-size: 100% 100%;
+}
+.a_background_bottom{
+
+	width: 100%;
+	height: 15.3%;
+	background-image: url("http://img.mukewang.com/55addfcb000189b314410138.png");
+	background-size: 100% 100%;
+}
+ /*实现太阳自转以及动画*/
+#sun{
+    background: url("Images/sun.png") no-repeat;
+    position:absolute;
+    z-index: 1;
+    top:-30px;
+    right: 40%;
+    width: 201px;
+    height: 201px;
+        	
+}
+.rotation{
+    -webkit-animation-name:sunRotation;
+    -webkit-animation-duration:20s;
+    -moz-animation-name:sunRotation;
+    -moz-animation-duration:20s;
+}
+@-webkit-keyframes sunRotation{
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-2000px) translateY(400px);
+    }
+}
+@-moz-keframes sunRotation{
+        	
+    0%{
+        transform: translateX(0) translateY(0);
+    }
+    100%{
+        transform: translateX(-2000px) translateY(400px);
+    }
+      
+}
+
+        /*飘云以及动画设置*/
+        .cloud{
+        	z-index: 2;
+        	position:absolute;
+        }
+        .cloud1{
+        	width: 181px;
+        	height: 101px;
+        	left: -5%;
+        	top:15%;
+        	background: url(images/cloud1.png);
+        }
+        .cloud2{
+        	width: 301px;
+        	height: 140px;
+        	right: -5%;
+        	background: url(images/cloud2.png);
+        }
+
+         .cloud1Anim{
+            -webkit-animation-name: smallCloud;
+            -webkit-animation-duration: 10s;
+            -webkit-animation-iteration: infinite;
+            -moz-animation-name: smallCloud;
+            -moz-animation-duration: 10s;
+            -moz-animation-iteration: infinite;
+        }
+        
+        .cloud2Anim{
+            -webkit-animation-name: largeCloud;
+            -webkit-animation-duration: 20s;
+            -webkit-animation-iteration: infinite;
+            -moz-animation-name: largeCloud;
+            -moz-animation-duration: 20s;
+            -moz-animation-iteration: infinite;
+        }
+
+        @-webkit-keyframes smallCloud {
+            0%{
+            	left: -5%;
+            }
+            100%{
+            	left: 100%;
+            }
+        }
+        
+        @-moz-keyframes smallCloud {
+            0%{
+            	left: -5%;
+            }
+            100%{
+            	left: 100%;
+            }
+        }
+        
+        @-webkit-keyframes largeCloud {
+            0% {
+                right: -5%;
+            }
+            100% {
+                right: 100%;
+            }
+        }
+        
+        @-moz-keyframes largeCloud {
+            0% {
+                right: -5%;
+            }
+            100% {
+                right: 100%;
+            }
+        }

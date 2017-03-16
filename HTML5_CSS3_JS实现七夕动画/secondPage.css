@@ -1,0 +1,108 @@
+/*第二个页面的样式*/
+.b_background{
+	width: 100%;
+	height: 100%;
+	background-image: url(images/QixiB-dark.png);
+	background-size: 100% 100%;
+	position: absolute;
+
+}
+.b_background_preload{
+	background: url(images/QixiB-bright.png) no-repeat -9999px -9999px;
+
+}
+/*商店*/
+.shop{
+	width: 39.5%;
+	height: 35.5%;
+	position: absolute;
+	left: 29%;
+	top:36.5%;
+	
+}
+.door{
+	width: 32%;
+	position: absolute;
+	top:32%;
+	height: 68%;
+	overflow: hidden;
+	left: 58.5%;
+	
+}
+.doorLeft,
+.doorRight {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    
+}
+.doorLeft {
+    left: 0%;
+    background: url(images/door-left.png);
+    background-size: 100% 100%;
+}
+
+.doorRight {
+    left: 50%;
+    background: url(images/door-right.png);
+    background-size: 100% 100%;
+}
+
+/*灯*/
+.lampBright{
+	background-image: url(images/QixiB-bright.png);
+}
+
+/*鸟以及鸟的动画*/
+.bird{
+	min-width: 91px;
+	min-height: 71px;
+	position: absolute;
+	top:10%;
+	right: -91%;
+	z-index: 10;
+	background: url(images/bird.png) no-repeat -182px 0px;
+
+}
+.flying{
+    -webkit-animation-name: bird-slow;
+    -webkit-animation-duration: 400ms;
+    -webkit-animation-timing-function: step-start;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: bird-slow;
+    -moz-animation-duration: 400ms;
+    -moz-animation-timing-function: step-start;
+    -moz-animation-iteration-count: infinite;
+}
+@-webkit-keyframes bird-slow {
+    
+    0%{
+    	background-position: -182px 0px;
+    }
+    50%{
+    	background-position: 0px 0px;
+    }
+    75%{
+    	background-position: -91px 0px;
+    }
+    100%{
+    	background-position: -182px 0px;
+    }
+}
+
+@-moz-keyframes bird-slow {
+   
+     0%{
+    	background-position: -182px 0px;
+    }
+    50%{
+    	background-position: 0px 0px;
+    }
+    75%{
+    	background-position: -91px 0px;
+    }
+    100%{
+    	background-position: -182px 0px;
+    }
+}
+}

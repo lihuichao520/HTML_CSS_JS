@@ -1,0 +1,143 @@
+/*网页设计的第一步：清除格式，即清除html标签自身所带的空白格式，后期若用再自己设置*/
+		*{
+
+			padding: 0;
+			margin: 0;
+		}
+
+		/*主体部分*/
+		#content{
+
+			width: 100%;
+			height: 100%;
+			/*top: 20%;
+			left: 20%;*/
+			overflow: hidden;
+			position: absolute;
+			/*border: 1px solid #ccc;*/
+		}
+
+		.content-wrap{
+
+			position: relative;
+			/*background-color:#30EE9F;*/
+			
+		}
+
+		ul,li{
+
+			list-style-type: none;
+		}
+
+		.content-wrap > li{
+
+			/*width: 100%;
+			height: 100%;*/
+			background: #CAE1FF;
+			color: red;
+			float: left;
+			overflow: hidden;
+			position:relative;
+		}
+
+		li:nth-child(2){
+            background: #9BCD9B;
+		}
+
+		li:nth-child(3){
+            background: yellow;
+		}
+
+        .button{
+        	position: absolute;
+        	bottom: 0;
+        }
+
+        button{
+        	width: 100px;
+        	height: 50px;
+        }
+        .behavior{
+           width: 151px;
+           height: 291px;
+           background: url(Images/boy.png) -0px -291px no-repeat;
+           position: absolute;/*采用动画的元素需要设置绝对定位*/
+           left: 6%;
+           top:55%;                /*小男孩的top坐标值 = 中间路段的中间坐标值 - 小男孩的高度*/
+        
+        }
+
+        /*新建一个SlowWalk类，在这个类中定义一个animation，
+        *通过关键帧keyframes定义一些规则，即如何去图片坐标
+        *    slowWalk样式：  用于定义一些动画参数，比如执行的时间、方式、算法、次数等.让人物开始进行帧动画切换
+        *    @keyframes规则：用于创建动画。在其中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果
+        */
+        .slowWalk{
+            -webkit-animation-name:person-slow;/*规定@keyframes动画的名称*/
+            -webkit-animation-duration:950ms;  /*规定动画完成一个周期所用的时间，默认为0*/
+            -webkit-animation-iteration-count:infinite;/*规定动画播放的次数，默认为1*/
+            -webkit-animation-timing-function:steps(1,start);/*动画切换的方式是一帧帧的改变*/
+            -moz-animation-name:person-slow;
+            -moz-animation-duration:950ms;
+            -moz-animation-iteration-count:infinite;
+            -moz-animation-timing-function:steps(1,start);
+        }
+
+        /*Animation的暂停。CSS3提供给Animation一个animation-play-state的样式
+        *来控制动画的暂停处理。
+        *在有animation动画人物元素节点上，通过动态增加和删除这个样式，就可以实现精灵的开始与暂停。
+        */
+        .pauseWalk{
+        	-webkit-animation-play-state:paused;
+        	-moz-animation-play-state:paused;
+        }
+        /*取花*/
+        .getFlower{
+        	-webkit-animation-name:person-Get-flower;/*规定@keyframes动画的名称*/
+            -webkit-animation-duration:950ms;  /*规定动画完成一个周期所用的时间，默认为0*/
+            -webkit-animation-iteration-count:infinite;/*规定动画播放的次数，默认为1*/
+            -webkit-animation-timing-function:steps(1,start);/*动画切换的方式是一帧帧的改变*/
+            -moz-animation-name:person-slow;
+            -moz-animation-duration:950ms;
+            -moz-animation-iteration-count:infinite;
+            -moz-animation-timing-function:steps(1,start);
+        }
+       @-webkit-keyframes person-Get-flower{
+       	  0%{
+       	  	background-position: -453px -0px;
+       	  }
+       	  25%{
+       	  	background-position: -904px -0px;
+       	  }
+       	  50%{
+       	  	background-position: -451px -0px;
+       	  }
+       	  75%{
+       	  	background-position: -753px -0px;
+       	  }
+       	  100%{
+       	  	background-position: -300px -0px;
+       	  }
+       }
+    @-moz-keyframes person-Get-flower{
+       	  0%{
+       	  	background-position: -453px -0px;
+       	  }
+       	  25%{
+       	  	background-position: -904px -0px;
+       	  }
+       	  50%{
+       	  	background-position: -451px -0px;
+       	  }
+       	  75%{
+       	  	background-position: -753px -0px;
+       	  }
+       	  100%{
+       	  	background-position: -300px -0px;
+       	  }
+       }
+       /*让小男孩恢复到原始状态*/
+       .boyOriginal{
+       	    background-position: -150px -0px;
+       }
+       
